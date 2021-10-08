@@ -1,6 +1,6 @@
-import { getGeojsonByUrl } from "./GeojsonUtils";
+import { loadBuildGeojson } from "./GeojsonUtils";
 export const loadBuildLayer = async () => {
-  let geoData = await getGeojsonByUrl("xianbuilding");
+  let geoData = await loadBuildGeojson("xianbuilding");
   if (geoData) {
     addBoxLayer(geoData);
   }

@@ -1,27 +1,27 @@
 import { buildingData } from "../api/mapApi";
-import { strMapToObj } from "./ObjUtil";
-export const getGeojsonByUrl = async (layer) => {
+export const loadBuildGeojson = async (layer) => {
   let resData = await buildingData(layer);
   let features = resData.data.features;
+  let pFollect=null;
+  if (features.length) {
+    pFollect=createGeojonByData(features)
+  }
+  return pFollect;
+};
+export const createGeojonByData = (features) => {
   let pFollect = {
     type: "FeatureCollection",
     features: [],
   };
-  if (features.length) {
-    //构建Geojson
-    let pFeatures = [];
-    for (let itm of features) {
-      let geo = JSON.parse(itm.geoJson);
-      console.log(geo)
-      let pMap = new Map();
-      pMap.set("type", "Feature");
-      pMap.set("properties", itm.attributes);
-      pMap.set("geometry", geo);
-      let geoObj = strMapToObj(pMap);
-      pFeatures.push(geoObj);
-    }
-    pFollect.features = pFeatures;
+  let pFeatures = [];
+  for (let itm of features) {
+    let geo = JSON.parse(itm.geoJson);
+    let geoObj = new Object();
+    geoObj.type = "Feature";
+    geoObj.properties = itm.attributes;
+    geoObj.geometry = geo;
+    pFeatures.push(geoObj);
   }
-  console.log(pFollect);
+  pFollect.features = pFeatures;
   return pFollect;
 };
