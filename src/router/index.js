@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import MapView from '../views/mapviews/MapView.vue'
+import MapContent from '../views/mapviews/MapContent.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'MapView',
-    component: MapView
+    name: 'MapContent',
+    component: MapContent
   }
   // {
   //   path: '/about',
