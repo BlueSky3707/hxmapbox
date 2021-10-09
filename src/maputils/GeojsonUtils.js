@@ -1,13 +1,4 @@
-import { buildingData } from "../api/mapApi";
-export const loadBuildGeojson = async (layer) => {
-  let resData = await buildingData(layer);
-  let features = resData.data.features;
-  let pFollect=null;
-  if (features.length) {
-    pFollect=createGeojonByData(features)
-  }
-  return pFollect;
-};
+
 export const createGeojonByData = (features) => {
   let pFollect = {
     type: "FeatureCollection",
